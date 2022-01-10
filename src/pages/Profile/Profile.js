@@ -5,16 +5,18 @@ const Profile = () => {
   const [foods, setFoods] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/allFood")
-      .then((res) => setFoods(res.data));
+    axios.get("").then((res) => setFoods(res.data));
   }, []);
+  
   const handleDetails = (id) => {
     navigate(`/food/${id}`);
   };
-  const handleDelete = (id) =>{
-    
-  }
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/allFood/${id}`)
+      .then((res) => console.log(res.data));
+  };
   return (
     <div>
       {foods.map((food) => (
@@ -26,7 +28,6 @@ const Profile = () => {
           <p>category: {food.category}</p>
           <p>ingredients: {food.ingredients}</p>
           <p>recipeName: {food.recipeName}</p>
-          <button>add Favourite</button>
           <button onClick={() => handleDelete(food._id)}>Delete</button>
           <button onClick={() => handleDetails(food._id)}>Details</button>
         </div>

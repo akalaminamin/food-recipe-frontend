@@ -1,13 +1,22 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components{
+  .nav-link {
+    @apply mr-8 hover:text-green-600 text-sm font-medium font-inter;
+  }
+  .search-input{
+    @apply mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
+    focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+    disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none
+    invalid:border-pink-500 invalid:text-pink-600
+    focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+  }
+  .btn{
+    @apply py-1 w-full inline-block rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700
+  }
+  .login-text{
+    @apply text-sm my-2 text-[#6b7280] font-openSans;
+  }
 }

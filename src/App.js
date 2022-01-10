@@ -10,22 +10,25 @@ import Profile from "./pages/Profile/Profile";
 import Food from "./pages/Food/Food";
 import Admin from "./pages/Admin/Admin";
 import FoodDetails from "./pages/FoodDetails/FoodDetails";
+import {AuthProvider} from "./contexts/AuthProvider/AuthProvider";
 function App() {
   return (
     <>
       <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/food" element={<Food />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/addRecipe" element={<AddRecipe />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/food/:id" element={<FoodDetails />} />
-          <Route path="/favourite" element={<Favourite />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
+        <AuthProvider>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/food" element={<Food />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/addRecipe" element={<AddRecipe />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/food/:id" element={<FoodDetails />} />
+            <Route path="/favourite" element={<Favourite />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </>
   );

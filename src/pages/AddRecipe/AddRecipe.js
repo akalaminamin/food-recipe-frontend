@@ -41,10 +41,14 @@ const AddRecipe = () => {
   };
 
   return (
-    <>
-      <form action="" onSubmit={handleSubmit}>
+    <div className="container my-5">
+      <div className="bg-yellow-500 p-5">
+      <h2 className="font-inter py-3 text-2xl text-gray-800 ">Add Your Food</h2>
+      <div className="grid grid-cols-6 ">
+      <form action="" onSubmit={handleSubmit} className="text-center col-span-6">
         <input
           name="name"
+          className="search-input"
           type="text"
           placeholder="name"
           defaultValue={foodRecipes.name}
@@ -53,6 +57,7 @@ const AddRecipe = () => {
         <br />
         <input
           name="email"
+          className="search-input"
           type="email"
           defaultValue={foodRecipes.email}
           placeholder="email"
@@ -61,6 +66,7 @@ const AddRecipe = () => {
         <br />
         <input
           name="recipeName"
+          className="search-input"
           type="text"
           defaultValue={foodRecipes.recipeName}
           placeholder="Recipe Name"
@@ -69,6 +75,7 @@ const AddRecipe = () => {
         <br />
         <input
           name="cusine"
+          className="search-input"
           type="text"
           defaultValue={foodRecipes.cusine}
           placeholder="cusine"
@@ -77,6 +84,7 @@ const AddRecipe = () => {
         <br />
         <input
           name="author"
+          className="search-input"
           type="text"
           defaultValue={foodRecipes.author}
           placeholder="Author"
@@ -85,6 +93,7 @@ const AddRecipe = () => {
         <br />
         <input
           name="RecipeImage"
+          className="search-input"
           type="text"
           defaultValue={foodRecipes.RecipeImage}
           placeholder="Enter Image url"
@@ -93,7 +102,7 @@ const AddRecipe = () => {
         <br />
         <select
           name="category"
-          className="form-select mb-4"
+          className="search-input"
           onChange={handleChange}
           defaultChecked={foodRecipes.category}
           required
@@ -111,22 +120,28 @@ const AddRecipe = () => {
         <textarea
           defaultValue={foodRecipes.method}
           name="method"
+          className="search-input"
           cols="30"
-          rows="10"
+          rows="5"
+          placeholder="write your method"
           onChange={handleChange}
         ></textarea>
         <br />
         <textarea
           defaultValue={foodRecipes.ingredients}
           name="ingredients"
+          className="search-input"
           cols="30"
-          rows="10"
+          rows="5"
+          placeholder="write your ingredients"
           onChange={handleChange}
         ></textarea>
         <br />
-        <button type="submit">Send</button>
+        <button type="submit" className="btn">Send</button>
       </form>
-    </>
+      </div>
+      </div>
+    </div>
   );
 };
 
