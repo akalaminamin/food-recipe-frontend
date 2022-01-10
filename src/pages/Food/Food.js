@@ -4,12 +4,34 @@ import { useNavigate } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
 const Food = () => {
   const [foods, setFoods] = useState([]);
+  const [searchText, setSearchText] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/allFood")
-      .then((res) => setFoods(res.data));
+    axios.get("https://warm-coast-40997.herokuapp.com/allFood").then((res) => {
+      setFoods(res.data);
+      setSearchText(res.data);
+    });
   }, []);
+
+  const handleFilter = (e) => {
+    const { value } = e.target;
+    const matchedFoods = foods.filter((food) =>
+      food?.recipeName?.toLowerCase().includes(value.toLowerCase())
+    );
+    setSearchText(matchedFoods);
+  };
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    const matchedFoods = foods.filter((food) =>
+      food?.category?.toLowerCase().includes(value.toLowerCase() || searchText)
+    );
+    setSearchText(matchedFoods);
+    if (!matchedFoods.length) {
+      setSearchText(foods);
+    }
+  };
+
   const handleDetails = (id) => {
     navigate(`/food/${id}`);
   };
@@ -17,14 +39,16 @@ const Food = () => {
   const handleFavourite = (food) => {
     food.status = "favourite";
     console.log(food);
-    axios.put(`http://localhost:5000/allFood/${food._id}`, food).then((res) => {
-      if (res.data.acknowledged) {
-        alert("add favourite item in favourite page");
-        navigate("/favourite");
-      }
-    });
+    axios
+      .put(`https://warm-coast-40997.herokuapp.com/allFood/${food._id}`, food)
+      .then((res) => {
+        if (res.data.acknowledged) {
+          alert("add favourite item in favourite page");
+          navigate("/favourite");
+        }
+      });
   };
-
+  console.log(searchText);
   return (
     <div className="container my-5">
       <div className="text-center">
@@ -36,8 +60,14 @@ const Food = () => {
             type="text"
             placeholder="Search Your Product"
             className="search-input col-span-6"
+            onChange={handleFilter}
           />
-          <select name="category" className="search-input col-span-2" required>
+          <select
+            name="category"
+            className="search-input col-span-2"
+            onChange={handleChange}
+            required
+          >
             <option value="select">Select</option>
             <option value="vagan">vagan</option>
             <option value="diet">diet</option>
@@ -50,7 +80,7 @@ const Food = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10 relative">
-        {foods.map((food) => (
+        {searchText.map((food) => (
           <div key={food._id} className="shadow-md p-2 bg-white rounded-sm">
             <div className="overflow-hidden relative group cursor-pointer">
               <img
@@ -70,6 +100,7 @@ const Food = () => {
             <h2 className="uppercase my-2 font-semibold text-md  font-openSans">
               {food.recipeName}
             </h2>
+            <p className="my-2 font-openSans">Category: {food.category}</p>
             <button className="btn" onClick={() => handleDetails(food._id)}>
               Details
             </button>

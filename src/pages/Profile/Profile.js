@@ -7,25 +7,23 @@ const Profile = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allFood/")
+      .get("https://warm-coast-40997.herokuapp.com/allFood/")
       .then((res) => setFoods(res.data));
   }, [isDelete]);
 
-  const handleDetails = (id) => {
-    navigate(`/food/${id}`);
+  const handleUpdate = (id) => {
+    navigate(`/addRecipe/${id}`)
   };
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:5000/allFood/${id}`)
-      .then((res) => {
-        if(res.data.acknowledged){
-          alert("delete successfull");
-          setDelete(true)
-        }else{
-          setDelete(false)
-        }
-      });
+    axios.delete(`https://warm-coast-40997.herokuapp.com/allFood/${id}`).then((res) => {
+      if (res.data.acknowledged) {
+        alert("delete successfull");
+        setDelete(true);
+      } else {
+        setDelete(false);
+      }
+    });
   };
   return (
     <div className="container my-5">
@@ -43,18 +41,18 @@ const Profile = () => {
               {food.recipeName}
             </h2>
             <div className="flex justify-between space-x-2">
-            <button
-              className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
-              onClick={() => handleDetails(food._id)}
-            >
-              Details
-            </button>
-            <button
-              className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
-              onClick={() => handleDelete(food._id)}
-            >
-              Delete
-            </button>
+              <button
+                className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
+                onClick={() => handleUpdate(food._id)}
+              >
+                Update
+              </button>
+              <button
+                className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
+                onClick={() => handleDelete(food._id)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}

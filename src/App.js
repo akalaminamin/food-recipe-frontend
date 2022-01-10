@@ -10,7 +10,8 @@ import Profile from "./pages/Profile/Profile";
 import Food from "./pages/Food/Food";
 import Admin from "./pages/Admin/Admin";
 import FoodDetails from "./pages/FoodDetails/FoodDetails";
-import {AuthProvider} from "./contexts/AuthProvider/AuthProvider";
+import { AuthProvider } from "./contexts/AuthProvider/AuthProvider";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 function App() {
   return (
     <>
@@ -21,12 +22,48 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/food" element={<Food />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/addRecipe" element={<AddRecipe />} />
+            <Route
+              path="/addRecipe"
+              element={
+                <PrivateRoute>
+                  <AddRecipe />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/addRecipe/:id"
+              element={
+                <PrivateRoute>
+                  <AddRecipe />
+                </PrivateRoute>
+              }
+            />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/food/:id" element={<FoodDetails />} />
-            <Route path="/favourite" element={<Favourite />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/food/:id"
+              element={
+                <PrivateRoute>
+                  <FoodDetails />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/favourite"
+              element={
+                <PrivateRoute>
+                  <Favourite />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

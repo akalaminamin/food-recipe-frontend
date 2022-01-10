@@ -7,7 +7,7 @@ const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allFood")
+      .get("https://warm-coast-40997.herokuapp.com/allFood")
       .then((res) => setFoods(res.data));
   }, []);
 
@@ -18,7 +18,7 @@ const Home = () => {
   const handleFavourite = (food) => {
     food.status = "favourite";
     console.log(food);
-    axios.put(`http://localhost:5000/allFood/${food._id}`, food).then((res) => {
+    axios.put(`https://warm-coast-40997.herokuapp.com/allFood/${food._id}`, food).then((res) => {
       if (res.data.acknowledged) {
         alert("add favourite item in favourite page");
         navigate("/favourite");
@@ -54,9 +54,12 @@ const Home = () => {
                 </span>
               </span>
             </div>
-            <h2 className="uppercase my-2 font-semibold text-md  font-openSans">
+            <h2 className="uppercase my-2 font-semibold  font-openSans">
               {food.recipeName}
             </h2>
+            <p className="my-2 font-openSans">
+              Category: {food.category}
+            </p>
             <button
               className="py-1 w-full text-md inline-block rounded-md uppercase bg-indigo-600 text-white hover:bg-indigo-700"
               onClick={() => handleDetails(food._id)}

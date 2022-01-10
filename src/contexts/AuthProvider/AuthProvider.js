@@ -59,6 +59,7 @@ import {
   
     const value = {
       currentUser,
+    loading,
       signup,
       login,
       logout,
