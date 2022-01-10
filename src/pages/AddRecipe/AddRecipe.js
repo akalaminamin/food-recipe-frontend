@@ -13,6 +13,7 @@ const AddRecipe = () => {
     ingredients: "",
     RecipeImage: "",
     status: "not favourite",
+    userEmail: "mdbabulmiah9901@gmail.com",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,9 +21,23 @@ const AddRecipe = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/allFood", foodRecipes)
-      .then((res) => console.log(res.data));
+    axios.post("http://localhost:5000/allFood", foodRecipes).then((res) => {
+      if (res.data.acknowledged) {
+        alert("food added successfull");
+      }
+    });
+    setFoodRecipes({
+      name: "",
+      email: "",
+      recipeName: "",
+      cusine: "",
+      category: "",
+      author: "",
+      method: "",
+      ingredients: "",
+      RecipeImage: "",
+    });
+    console.log(foodRecipes);
   };
 
   return (

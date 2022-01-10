@@ -16,7 +16,7 @@ const Admin = () => {
   return (
     <div>
       <h2>Add Admin</h2>
-      <form action="" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
           name="email"
