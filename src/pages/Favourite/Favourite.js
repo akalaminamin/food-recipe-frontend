@@ -28,7 +28,7 @@ const Favourite = () => {
       <h2 className="text-center text-2xl font-semibold">Your all Favourite Food</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10 relative">
         {foods.map((food) => (
-          <div key={food.id} className="shadow-md p-2 bg-white rounded-sm">
+          <div key={food._id} className="shadow-md p-2 bg-white rounded-sm">
             <div className="overflow-hidden relative group cursor-pointer">
               <img
                 className="cursor-pointer transition-all ease-in duration-200 hover:scale-110"

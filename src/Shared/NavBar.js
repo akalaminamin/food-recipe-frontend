@@ -1,26 +1,3 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// const NavBar = () => {
-//   return (
-//     <>
-//     <div className="navbar">
-//       <Link to="/">Home</Link>
-//       <Link to="/food">Food</Link>
-//       <Link to="/admin">Admin</Link>
-//       <Link to="/favourite">Favourite</Link>
-//       <Link to="/addRecipe">Add Recipe</Link>
-//       <Link to="/login">Login</Link>
-//       <Link to="/register">Register</Link>
-//       <Link to="/profile">Profile</Link>
-//     </div>
-
-//     </>
-
-//   );
-// };
-
-// export default NavBar;
-
 import React, { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -36,7 +13,7 @@ const NavBar = () => {
       <header
         className={`text-gray-600 body-font ${
           !show ? "hidden" : ""
-        } bg-white shadow-md border-b h-64 md:h-16 px-3 md:flex items-start !pl-0 md:items-center transition-all origin-left duration-300 ease-in`}
+        } bg-white shadow-md border-b h-80 md:h-16 px-3 md:flex items-start !pl-0 md:items-center transition-all origin-left duration-300 ease-in`}
       >
         <div className="container mx-auto flex flex-wrap flex-col md:flex-row items-start md:items-center">
           <nav className="md:mr-auto flex flex-wrap text-base justify-start cursor-pointer flex-col md:flex-row space-y-4 md:space-y-0">
@@ -74,6 +51,13 @@ const NavBar = () => {
               onClick={() => setShow(!show)}
             >
               Add Recipe
+            </Link>
+            <Link
+              to="/profile"
+              className="nav-link"
+              onClick={() => setShow(!show)}
+            >
+              Profile
             </Link>
             <Link
               to="/login"

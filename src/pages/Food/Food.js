@@ -32,30 +32,26 @@ const Food = () => {
           Search Your Favourite Food
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-8 space-x-3">
-        <input
-          type="text"
-          placeholder="Search Your Product"
-          className="search-input col-span-6"
-        />
-        <select
-          name="category"
-          className="search-input col-span-2"
-          required
-        >
-          <option value="select">Select</option>
-          <option value="vagan">vagan</option>
-          <option value="diet">diet</option>
-          <option value="dessert">dessert</option>
-          <option value="cookies">cookies</option>
-          <option value="fastfood">fastfood</option>
-          <option value="drinks">drinks</option>
-          <option value="Meat">Meat</option>
-        </select>
+          <input
+            type="text"
+            placeholder="Search Your Product"
+            className="search-input col-span-6"
+          />
+          <select name="category" className="search-input col-span-2" required>
+            <option value="select">Select</option>
+            <option value="vagan">vagan</option>
+            <option value="diet">diet</option>
+            <option value="dessert">dessert</option>
+            <option value="cookies">cookies</option>
+            <option value="fastfood">fastfood</option>
+            <option value="drinks">drinks</option>
+            <option value="Meat">Meat</option>
+          </select>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10 relative">
         {foods.map((food) => (
-          <div key={food.id} className="shadow-md p-2 bg-white rounded-sm">
+          <div key={food._id} className="shadow-md p-2 bg-white rounded-sm">
             <div className="overflow-hidden relative group cursor-pointer">
               <img
                 className="cursor-pointer transition-all ease-in duration-200 hover:scale-110"
@@ -74,10 +70,7 @@ const Food = () => {
             <h2 className="uppercase my-2 font-semibold text-md  font-openSans">
               {food.recipeName}
             </h2>
-            <button
-              className="btn"
-              onClick={() => handleDetails(food._id)}
-            >
+            <button className="btn" onClick={() => handleDetails(food._id)}>
               Details
             </button>
           </div>
