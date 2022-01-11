@@ -52,8 +52,6 @@ const AddRecipe = () => {
           }
         });
       setFoodRecipes({
-        name: "",
-        email: "",
         recipeName: "",
         cusine: "",
         category: "",
@@ -77,24 +75,6 @@ const AddRecipe = () => {
             className="text-center col-span-6"
           >
             <input
-              name="name"
-              className="search-input"
-              type="text"
-              placeholder="name"
-              defaultValue={id ? foodRecipes.name : ""}
-              onChange={handleChange}
-            />
-            <br />
-            <input
-              name="email"
-              className="search-input"
-              type="email"
-              defaultValue={id ? foodRecipes.email : ""}
-              placeholder="email"
-              onChange={handleChange}
-            />
-            <br />
-            <input
               name="recipeName"
               className="search-input"
               type="text"
@@ -102,7 +82,6 @@ const AddRecipe = () => {
               placeholder="Recipe Name"
               onChange={handleChange}
             />
-            <br />
             <input
               name="cusine"
               className="search-input"
@@ -111,7 +90,6 @@ const AddRecipe = () => {
               placeholder="cusine"
               onChange={handleChange}
             />
-            <br />
             <input
               name="author"
               className="search-input"
@@ -120,7 +98,6 @@ const AddRecipe = () => {
               placeholder="Author"
               onChange={handleChange}
             />
-            <br />
             <input
               name="RecipeImage"
               className="search-input"
@@ -129,7 +106,6 @@ const AddRecipe = () => {
               placeholder="Enter Image url"
               onChange={handleChange}
             />
-            <br />
             <select
               name="category"
               className="search-input"
@@ -146,7 +122,6 @@ const AddRecipe = () => {
               <option value="drinks">drinks</option>
               <option value="Meat">Meat</option>
             </select>
-            <br />
             <textarea
               defaultValue={id ? foodRecipes.method : ""}
               name="method"
@@ -156,7 +131,6 @@ const AddRecipe = () => {
               placeholder="write your method"
               onChange={handleChange}
             ></textarea>
-            <br />
             <textarea
               defaultValue={id ? foodRecipes.ingredients : ""}
               name="ingredients"
@@ -166,7 +140,6 @@ const AddRecipe = () => {
               placeholder="write your ingredients"
               onChange={handleChange}
             ></textarea>
-            <br />
             <button type="submit" className="btn">
               {id ? "Update Food" : "Add Food"}
             </button>
