@@ -19,7 +19,7 @@ const AddRecipe = () => {
   });
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/allFood/${id}`)
+      .get(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
       .then((res) => {
         setFoodRecipes(res.data);
       });
@@ -33,7 +33,7 @@ const AddRecipe = () => {
     if (id) {
       axios
         .put(
-          `http://localhost:5000/allFood/addRecipe/${id}`,
+          `https://warm-coast-40997.herokuapp.com/allFood/addRecipe/${id}`,
           foodRecipes
         )
         .then((res) => {
@@ -44,7 +44,7 @@ const AddRecipe = () => {
     } else {
       foodRecipes.userEmail = currentUser?.email;
       axios
-        .post("http://localhost:5000/allFood", foodRecipes)
+        .post("https://warm-coast-40997.herokuapp.com/allFood", foodRecipes)
         .then((res) => {
           if (res.data.acknowledged) {
             alert("food added successfull");

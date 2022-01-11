@@ -10,7 +10,7 @@ const Admin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/admin", admin)
+      .post("https://warm-coast-40997.herokuapp.com/admin", admin)
       .then((res) => console.log(res.data));
   };
   return (

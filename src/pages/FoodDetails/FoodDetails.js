@@ -7,7 +7,7 @@ const FoodDetails = () => {
   const [food, setFood] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/allFood/${id}`)
+      .get(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
       .then((res) => setFood(res.data));
   }, []);
   return (

@@ -11,7 +11,7 @@ const Food = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:5000/allFood").then((res) => {
+    axios.get("https://warm-coast-40997.herokuapp.com/allFood").then((res) => {
       setFoods(res.data);
       setSearchText(res.data);
     });
@@ -44,7 +44,7 @@ const Food = () => {
     food.status = "favourite";
     food.userEmail = currentUser?.email;
     console.log(food);
-    axios.post(`http://localhost:5000/favourite`, food).then((res) => {
+    axios.post(`https://warm-coast-40997.herokuapp.com/favourite`, food).then((res) => {
       console.log(res.data);
       if (res.data.acknowledged) {
         alert("add favourite item in favourite page");
@@ -95,7 +95,11 @@ const Food = () => {
                 className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-700 bg-opacity-0 group-hover:bg-opacity-50 text-2xl text-indigo-700 p-2 transition-all ease-in-out duration-300"
                 onClick={() => handleFavourite(food)}
               >
-                <span className="absolute top-14 right-4">
+                <span className="absolute top-4 right-5">
+                  <AiFillHeart />
+                </span>
+              </span>
+              <span className="absolute top-14 right-4">
                   <FacebookShareButton
                     url={`https://recipe-book-51ad3.web.app/food/details/${food._id}`}
                     quote={food.recipeName}
@@ -103,10 +107,6 @@ const Food = () => {
                     <FacebookIcon size={30} />
                   </FacebookShareButton>
                 </span>
-                <span className="absolute top-4 right-5">
-                  <AiFillHeart />
-                </span>
-              </span>
             </div>
             <h2 className="uppercase my-2 font-semibold text-md  font-openSans">
               {food.recipeName}
