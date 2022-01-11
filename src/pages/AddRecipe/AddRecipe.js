@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 const AddRecipe = () => {
   const { currentUser } = useAuth();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [foodRecipes, setFoodRecipes] = useState({
     name: "",
     email: "",
@@ -15,7 +16,6 @@ const AddRecipe = () => {
     method: "",
     ingredients: "",
     RecipeImage: "",
-    status: "not favourite",
   });
   useEffect(() => {
     axios
@@ -48,6 +48,7 @@ const AddRecipe = () => {
         .then((res) => {
           if (res.data.acknowledged) {
             alert("food added successfull");
+            navigate("/")
           }
         });
       setFoodRecipes({

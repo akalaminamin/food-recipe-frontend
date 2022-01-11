@@ -8,31 +8,29 @@ const Favourite = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   useEffect(() => {
-    axios.get("https://warm-coast-40997.herokuapp.com/allFood").then((res) => {
+    axios.get("https://warm-coast-40997.herokuapp.com/favourite").then((res) => {
       const favouriteFoods = res.data.filter(
         (favourite) =>
           favourite.status === "favourite" &&
           favourite.userEmail === currentUser?.email
       );
       setFoods(favouriteFoods);
+      console.log(favouriteFoods);
     });
   }, [isDelete]);
-
   const handleDetails = (id) => {
     navigate(`/food/${id}`);
   };
+  // remove favourite item
   const handleRemoveFavourite = (food) => {
     food.status = "not favourite";
-    axios
-      .put(`https://warm-coast-40997.herokuapp.com/allFood/${food._id}`, food)
-      .then((res) => {
-        if (res.data.acknowledged) {
-          alert("Remove Favourite succesfull");
-          setDelete(true);
-        }
-      });
+    axios.put(`https://warm-coast-40997.herokuapp.com/allFood/${food._id}`, food).then((res) => {
+      if (res.data.acknowledged) {
+        alert("Remove Favourite succesfull");
+        setDelete(true);
+      }
+    });
   };
-  console.log(foods);
   return (
     <div className="container my-4">
       <h2 className="text-center text-2xl font-semibold">

@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
+import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
+
 const Food = () => {
   const [foods, setFoods] = useState([]);
   const [searchText, setSearchText] = useState([]);
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     axios.get("https://warm-coast-40997.herokuapp.com/allFood").then((res) => {
@@ -38,17 +41,16 @@ const Food = () => {
 
   const handleFavourite = (food) => {
     food.status = "favourite";
+    food.userEmail = currentUser?.email;
     console.log(food);
-    axios
-      .put(`https://warm-coast-40997.herokuapp.com/allFood/${food._id}`, food)
-      .then((res) => {
-        if (res.data.acknowledged) {
-          alert("add favourite item in favourite page");
-          navigate("/favourite");
-        }
-      });
+    axios.post(`https://warm-coast-40997.herokuapp.com/favourite`, food).then((res) => {
+      console.log(res.data);
+      if (res.data.acknowledged) {
+        alert("add favourite item in favourite page");
+        navigate("/favourite");
+      }
+    });
   };
-  console.log(searchText);
   return (
     <div className="container my-5">
       <div className="text-center">

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
+import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 const Home = () => {
   const [foods, setFoods] = useState([]);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
   useEffect(() => {
     axios
       .get("https://warm-coast-40997.herokuapp.com/allFood")
@@ -17,8 +19,10 @@ const Home = () => {
 
   const handleFavourite = (food) => {
     food.status = "favourite";
-    console.log(food);
-    axios.put(`https://warm-coast-40997.herokuapp.com/allFood/${food._id}`, food).then((res) => {
+    food.userEmail = currentUser?.email;
+    console.log(food)
+    axios.post(`https://warm-coast-40997.herokuapp.com/favourite`, food).then((res) => {
+      console.log(res.data);
       if (res.data.acknowledged) {
         alert("add favourite item in favourite page");
         navigate("/favourite");
@@ -56,9 +60,7 @@ const Home = () => {
             <h2 className="uppercase my-2 font-semibold  font-openSans">
               {food.recipeName}
             </h2>
-            <p className="my-2 font-openSans">
-              Category: {food.category}
-            </p>
+            <p className="my-2 font-openSans">Category: {food.category}</p>
             <button
               className="py-1 w-full text-md inline-block rounded-md uppercase bg-indigo-600 text-white hover:bg-indigo-700"
               onClick={() => handleDetails(food._id)}
