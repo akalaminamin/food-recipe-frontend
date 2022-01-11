@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 const Profile = () => {
   const [foods, setFoods] = useState([]);
   const [isDelete, setDelete] = useState(false);
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     axios.get("https://warm-coast-40997.herokuapp.com/allFood/").then((res) => {
-      const matchData = res.data.filter(
-        (food) => food?.userEmail === currentUser.email
-      );
+      const matchData = res.data;
       setFoods(matchData);
     });
   }, [isDelete]);
@@ -32,7 +28,7 @@ const Profile = () => {
         }
       });
   };
-  console.log(foods)
+  console.log(foods);
   return (
     <div className="container my-5">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10 relative">
