@@ -21,7 +21,7 @@ const NavBar = () => {
       setAdmin(userAdmin);
     });
   }, []);
-  console.log(admin);
+  console.log(currentUser);
   return (
     <div className="sticky top-0 z-50">
       <div className="text-xl pl-4 py-3 bg-white md:hidden block">

@@ -2,12 +2,13 @@ import { initializeApp } from "firebase/app";
 
 // firebase configuration
 const app = initializeApp({
-  apiKey: "AIzaSyDM2ltskH8Rb3RDKHZa1EM-xQpW6NYGIvs",
-  authDomain: "book-recipe-d40a5.firebaseapp.com",
-  projectId: "book-recipe-d40a5",
-  storageBucket: "book-recipe-d40a5.appspot.com",
-  messagingSenderId: "948246240435",
-  appId: "1:948246240435:web:c693b2ec7a36b9acb4e4c6",
+  apiKey: "AIzaSyAA_6glbNsqyf-RiyDgeFwzlM0Dhnb6wWU",
+  authDomain: "recipeapp-86c94.firebaseapp.com",
+  projectId: "recipeapp-86c94",
+  storageBucket: "recipeapp-86c94.appspot.com",
+  messagingSenderId: "532190733172",
+  appId: "1:532190733172:web:20d7c207f9f67bff85c221",
+  measurementId: "G-LSYH6D2TX7",
 });
 
 export default app;
