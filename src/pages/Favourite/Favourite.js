@@ -8,28 +8,33 @@ const Favourite = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   useEffect(() => {
-    axios.get("https://warm-coast-40997.herokuapp.com/favourite").then((res) => {
-      const favouriteFoods = res.data.filter(
-        (favourite) =>
-          favourite.status === "favourite" &&
-          favourite.userEmail === currentUser?.email
-      );
-      setFoods(favouriteFoods);
-      console.log(favouriteFoods);
-    });
+    axios
+      .get("http://localhost:5000/favourite")
+      .then((res) => {
+        const favouriteFoods = res.data.filter(
+          (favourite) =>
+            favourite.status === "favourite" &&
+            favourite.userEmail === currentUser?.email
+        );
+        setFoods(favouriteFoods);
+      });
   }, [isDelete]);
   const handleDetails = (id) => {
     navigate(`/food/${id}`);
   };
+
   // remove favourite item
   const handleRemoveFavourite = (food) => {
-    food.status = "not favourite";
-    axios.put(`https://warm-coast-40997.herokuapp.com/allFood/${food._id}`, food).then((res) => {
-      if (res.data.acknowledged) {
-        alert("Remove Favourite succesfull");
-        setDelete(true);
-      }
-    });
+    axios
+      .delete(`http://localhost:5000/favourite/${food._id}`)
+      .then((res) => {
+        if (res.data.deleteCount) {
+          alert("delete successfull");
+          setDelete(true);
+        } else {
+          setDelete(false);
+        }
+      });
   };
   return (
     <div className="container my-4">
@@ -41,15 +46,17 @@ const Favourite = () => {
           <div key={food._id} className="shadow-md p-2 bg-white rounded-sm">
             <div className="overflow-hidden relative group cursor-pointer">
               <img
-                className="cursor-pointer transition-all ease-in duration-200 hover:scale-110"
+                className="transition-all ease-in duration-200 hover:scale-110"
                 src={food.RecipeImage}
                 alt="product"
               />
-              <span
-                className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-700 bg-opacity-0 group-hover:bg-opacity-50 text-2xl text-indigo-700 p-2 transition-all ease-in-out duration-300"
-                onClick={() => handleRemoveFavourite(food)}
-              >
-                <span className="absolute top-4 right-5">RF</span>
+              <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-700 bg-opacity-0 group-hover:bg-opacity-50 text-2xl text-indigo-700 p-2 transition-all ease-in-out duration-300">
+                <h2
+                  className="absolute top-4 right-5"
+                  onClick={() => handleRemoveFavourite(food)}
+                >
+                  RF
+                </h2>
               </span>
             </div>
             <h2 className="uppercase my-2 font-semibold text-md  font-openSans">

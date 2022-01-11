@@ -8,7 +8,7 @@ const Profile = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("https://warm-coast-40997.herokuapp.com/allFood/").then((res) => {
+    axios.get("http://localhost:5000/allFood/").then((res) => {
       const matchData = res.data.filter(
         (food) => food?.userEmail === currentUser.email
       );
@@ -22,7 +22,7 @@ const Profile = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
+      .delete(`http://localhost:5000/allFood/${id}`)
       .then((res) => {
         if (res.data.acknowledged) {
           alert("delete successfull");
@@ -32,7 +32,6 @@ const Profile = () => {
         }
       });
   };
-  // akalaminamin91@gmail.com
   console.log(foods)
   return (
     <div className="container my-5">
