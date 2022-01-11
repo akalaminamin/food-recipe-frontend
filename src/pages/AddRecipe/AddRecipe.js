@@ -16,12 +16,13 @@ const AddRecipe = () => {
     ingredients: "",
     RecipeImage: "",
     status: "not favourite",
-    userEmail: currentUser?.email,
   });
   useEffect(() => {
-    axios.get(`https://warm-coast-40997.herokuapp.com/allFood/${id}`).then((res) => {
-      setFoodRecipes(res.data);
-    });
+    axios
+      .get(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
+      .then((res) => {
+        setFoodRecipes(res.data);
+      });
   }, [id]);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,18 +32,24 @@ const AddRecipe = () => {
     e.preventDefault();
     if (id) {
       axios
-        .put(`https://warm-coast-40997.herokuapp.com/allFood/addRecipe/${id}`, foodRecipes)
-        .then((res) =>{
-          if(res.data.acknowledged){
-            alert("Food update successfull")
+        .put(
+          `https://warm-coast-40997.herokuapp.com/allFood/addRecipe/${id}`,
+          foodRecipes
+        )
+        .then((res) => {
+          if (res.data.acknowledged) {
+            alert("Food update successfull");
           }
         });
     } else {
-      axios.post("https://warm-coast-40997.herokuapp.com/allFood", foodRecipes).then((res) => {
-        if (res.data.acknowledged) {
-          alert("food added successfull");
-        }
-      });
+      foodRecipes.userEmail = currentUser?.email;
+      axios
+        .post("https://warm-coast-40997.herokuapp.com/allFood", foodRecipes)
+        .then((res) => {
+          if (res.data.acknowledged) {
+            alert("food added successfull");
+          }
+        });
       setFoodRecipes({
         name: "",
         email: "",

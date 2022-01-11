@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 const Favourite = () => {
   const [foods, setFoods] = useState([]);
   const [isDelete, setDelete] = useState(false);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
   useEffect(() => {
     axios.get("https://warm-coast-40997.herokuapp.com/allFood").then((res) => {
-      const favouriteFood = res.data;
-      setFoods(favouriteFood);
+      const favouriteFoods = res.data.filter(
+        (favourite) =>
+          favourite.status === "favourite" &&
+          favourite.userEmail === currentUser?.email
+      );
+      setFoods(favouriteFoods);
     });
   }, [isDelete]);
 
   const handleDetails = (id) => {
     navigate(`/food/${id}`);
   };
-  const handleRemoveFavourite = (id) => {
+  const handleRemoveFavourite = (food) => {
+    food.status = "not favourite";
     axios
-      .delete(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
+      .put(`https://warm-coast-40997.herokuapp.com/allFood/${food._id}`, food)
       .then((res) => {
         if (res.data.acknowledged) {
-          alert("delete succesfull");
+          alert("Remove Favourite succesfull");
           setDelete(true);
         }
       });
   };
+  console.log(foods);
   return (
     <div className="container my-4">
       <h2 className="text-center text-2xl font-semibold">
@@ -41,7 +49,7 @@ const Favourite = () => {
               />
               <span
                 className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-700 bg-opacity-0 group-hover:bg-opacity-50 text-2xl text-indigo-700 p-2 transition-all ease-in-out duration-300"
-                onClick={() => handleRemoveFavourite(food._id)}
+                onClick={() => handleRemoveFavourite(food)}
               >
                 <span className="absolute top-4 right-5">RF</span>
               </span>

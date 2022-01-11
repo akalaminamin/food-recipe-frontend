@@ -25,7 +25,6 @@ const Home = () => {
       }
     });
   };
-
   return (
     <div className="container py-10 bg-gray-50">
       <div className="inline-block hero-wrapper">

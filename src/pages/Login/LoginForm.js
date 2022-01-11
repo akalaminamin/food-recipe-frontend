@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  let location = useLocation();
 
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
 
   const { login } = useAuth();
   const navigate = useNavigate();
+  let from = location.state?.from?.pathname || "/";
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -18,7 +20,8 @@ export default function LoginForm() {
       setError("");
       setLoading(true);
       await login(email, password);
-      navigate("/");
+      navigate(from, { replace: true });
+      window.location.reload();
     } catch (err) {
       console.log(err);
       setLoading(false);

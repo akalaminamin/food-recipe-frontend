@@ -1,30 +1,39 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 const Profile = () => {
   const [foods, setFoods] = useState([]);
   const [isDelete, setDelete] = useState(false);
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("https://warm-coast-40997.herokuapp.com/allFood/")
-      .then((res) => setFoods(res.data));
+    axios.get("https://warm-coast-40997.herokuapp.com/allFood/").then((res) => {
+      const matchData = res.data.filter(
+        (food) => food?.userEmail === currentUser.email
+      );
+      setFoods(matchData);
+    });
   }, [isDelete]);
 
   const handleUpdate = (id) => {
-    navigate(`/addRecipe/${id}`)
+    navigate(`/addRecipe/${id}`);
   };
 
   const handleDelete = (id) => {
-    axios.delete(`https://warm-coast-40997.herokuapp.com/allFood/${id}`).then((res) => {
-      if (res.data.acknowledged) {
-        alert("delete successfull");
-        setDelete(true);
-      } else {
-        setDelete(false);
-      }
-    });
+    axios
+      .delete(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
+      .then((res) => {
+        if (res.data.acknowledged) {
+          alert("delete successfull");
+          setDelete(true);
+        } else {
+          setDelete(false);
+        }
+      });
   };
+  // akalaminamin91@gmail.com
+  console.log(foods)
   return (
     <div className="container my-5">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10 relative">
