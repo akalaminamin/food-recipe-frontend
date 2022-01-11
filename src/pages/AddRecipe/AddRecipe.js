@@ -64,8 +64,8 @@ const AddRecipe = () => {
   };
   return (
     <div className="container my-5">
-      <div className="bg-yellow-500 p-5">
-        <h2 className="font-inter py-3 text-2xl text-gray-800 ">
+      <div className="bg-indigo-800 mx-auto w-12/12 md:w-8/12 p-5 rounded-md">
+        <h2 className="font-inter py-3 text-2xl font-bold text-white ">
           {id ? "Update Your Food" : "Add Your Food"}
         </h2>
         <div className="grid grid-cols-6 ">
@@ -140,7 +140,7 @@ const AddRecipe = () => {
               placeholder="write your ingredients"
               onChange={handleChange}
             ></textarea>
-            <button type="submit" className="btn">
+            <button type="submit" className="btn bg-indigo-900">
               {id ? "Update Food" : "Add Food"}
             </button>
           </form>
