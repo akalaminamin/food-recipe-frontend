@@ -24,7 +24,6 @@ const Favourite = () => {
 
   // remove favourite item
   const handleRemoveFavourite = (id) => {
-    console.log(id)
     axios.delete(`https://warm-coast-40997.herokuapp.com/favourite/${id}`).then((res) => {
       if(res.data.deletedCount){
         Swal.fire("Removed!", "Favourite Food Removed", "success");
