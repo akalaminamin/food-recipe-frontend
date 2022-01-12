@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 const AddRecipe = () => {
   const { currentUser } = useAuth();
   const { id } = useParams();
@@ -36,7 +37,7 @@ const AddRecipe = () => {
         )
         .then((res) => {
           if (res.data.acknowledged) {
-            alert("Food update successfull");
+            Swal.fire("Update!", "Food Update Success", "success");
           }
         });
     } else {
@@ -45,7 +46,7 @@ const AddRecipe = () => {
         .post("https://warm-coast-40997.herokuapp.com/allFood", foodRecipes)
         .then((res) => {
           if (res.data.acknowledged) {
-            alert("food added successfull");
+            Swal.fire("Added!", "Food added successfull", "success");
             navigate("/")
           }
         });

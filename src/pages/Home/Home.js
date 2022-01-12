@@ -5,6 +5,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 import { FacebookShareButton, FacebookIcon } from "react-share";
 import Loader from "../../components/Loader/Loader";
+import Swal from "sweetalert2";
 const Home = () => {
   const [foods, setFoods] = useState([]);
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const Home = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.acknowledged) {
-          alert("add favourite item in favourite page");
+          Swal.fire("Favourite!", "Added Favourite Success", "success");
           navigate("/favourite");
         }
       });

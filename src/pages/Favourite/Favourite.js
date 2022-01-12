@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 const Favourite = () => {
   const [foods, setFoods] = useState([]);
   const [isDelete, setDelete] = useState(false);
@@ -26,7 +27,7 @@ const Favourite = () => {
     console.log(id)
     axios.delete(`https://warm-coast-40997.herokuapp.com/favourite/${id}`).then((res) => {
       if(res.data.deletedCount){
-        alert("Your Favourite menu is remove")
+        Swal.fire("Removed!", "Favourite Food Removed", "success");
         setDelete(true)
       }else{
         setDelete(false)

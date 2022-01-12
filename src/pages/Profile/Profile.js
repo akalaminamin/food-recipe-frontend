@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import Swal from "sweetalert2";
 const Profile = () => {
   const [foods, setFoods] = useState([]);
   const [isDelete, setDelete] = useState(false);
@@ -22,7 +23,7 @@ const Profile = () => {
       .delete(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
       .then((res) => {
         if (res.data.deletedCount) {
-          alert("delete successfull");
+          Swal.fire("Deleted!", "Food Deleted Success", "success");
           setDelete(true);
         } else {
           setDelete(false);
