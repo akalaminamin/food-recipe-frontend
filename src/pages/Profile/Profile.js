@@ -3,9 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import Swal from "sweetalert2";
+import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 const Profile = () => {
   const [foods, setFoods] = useState([]);
   const [isDelete, setDelete] = useState(false);
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     axios.get("https://warm-coast-40997.herokuapp.com/allFood/").then((res) => {
@@ -49,18 +51,29 @@ const Profile = () => {
                 {food.recipeName}
               </h2>
               <div className="flex justify-between space-x-2">
-                <button
-                  className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
-                  onClick={() => handleUpdate(food._id)}
-                >
-                  Update
-                </button>
-                <button
-                  className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
-                  onClick={() => handleDelete(food._id)}
-                >
-                  Delete
-                </button>
+                {food.userEmail === currentUser.email ? (
+                  <>
+                    <button
+                      className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
+                      onClick={() => handleUpdate(food._id)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
+                      onClick={() => handleDelete(food._id)}
+                    >
+                      Delete
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className="py-1 w-full rounded-sm uppercase bg-indigo-600 text-white hover:bg-indigo-700"
+                    onClick={() => handleUpdate(food._id)}
+                  >
+                    Update
+                  </button>
+                )}
               </div>
             </div>
           ))
