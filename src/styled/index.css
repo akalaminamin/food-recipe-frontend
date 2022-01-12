@@ -19,4 +19,7 @@
   .login-text{
     @apply text-sm my-2 text-[#6b7280] font-openSans;
   }
+  .image-style{
+    @apply transition-all ease-in duration-200 hover:scale-110 h-60 w-full object-cover
+  }
 }

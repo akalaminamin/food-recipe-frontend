@@ -48,7 +48,7 @@ const Home = () => {
             <div key={food._id} className="shadow-md p-2 bg-white rounded-sm">
               <div className="overflow-hidden relative group cursor-pointer">
                 <img
-                  className="transition-all ease-in duration-200 hover:scale-110"
+                  className="image-style"
                   src={food.RecipeImage}
                   alt="product"
                 />
