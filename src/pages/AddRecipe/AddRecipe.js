@@ -7,8 +7,6 @@ const AddRecipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [foodRecipes, setFoodRecipes] = useState({
-    name: "",
-    email: "",
     recipeName: "",
     cusine: "",
     category: "",
@@ -19,7 +17,7 @@ const AddRecipe = () => {
   });
   useEffect(() => {
     axios
-      .get(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
+      .get(`http://localhost:5000/allFood/${id}`)
       .then((res) => {
         setFoodRecipes(res.data);
       });
@@ -33,7 +31,7 @@ const AddRecipe = () => {
     if (id) {
       axios
         .put(
-          `https://warm-coast-40997.herokuapp.com/allFood/addRecipe/${id}`,
+          `http://localhost:5000/allFood/addRecipe/${id}`,
           foodRecipes
         )
         .then((res) => {
@@ -44,7 +42,7 @@ const AddRecipe = () => {
     } else {
       foodRecipes.userEmail = currentUser?.email;
       axios
-        .post("https://warm-coast-40997.herokuapp.com/allFood", foodRecipes)
+        .post("http://localhost:5000/allFood", foodRecipes)
         .then((res) => {
           if (res.data.acknowledged) {
             alert("food added successfull");
@@ -62,6 +60,7 @@ const AddRecipe = () => {
       });
     }
   };
+  console.log(foodRecipes)
   return (
     <div className="container my-5">
       <div className="bg-indigo-800 mx-auto w-12/12 md:w-8/12 p-5 rounded-md">

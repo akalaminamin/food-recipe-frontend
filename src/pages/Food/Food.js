@@ -11,7 +11,7 @@ const Food = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("https://warm-coast-40997.herokuapp.com/allFood").then((res) => {
+    axios.get("http://localhost:5000/allFood").then((res) => {
       setFoods(res.data);
       setSearchText(res.data);
     });
@@ -44,7 +44,7 @@ const Food = () => {
     food.status = "favourite";
     food.userEmail = currentUser?.email;
     console.log(food);
-    axios.post(`https://warm-coast-40997.herokuapp.com/favourite`, food).then((res) => {
+    axios.post(`http://localhost:5000/favourite`, food).then((res) => {
       console.log(res.data);
       if (res.data.acknowledged) {
         alert("add favourite item in favourite page");

@@ -11,7 +11,7 @@ const Home = () => {
   const { currentUser } = useAuth();
   useEffect(() => {
     axios
-      .get("https://warm-coast-40997.herokuapp.com/allFood")
+      .get("http://localhost:5000/allFood")
       .then((res) => setFoods(res.data));
   }, []);
 
@@ -22,14 +22,16 @@ const Home = () => {
   const handleFavourite = (food) => {
     food.status = "favourite";
     food.userEmail = currentUser?.email;
-    console.log(food);
-    axios.post(`https://warm-coast-40997.herokuapp.com/favourite`, food).then((res) => {
-      console.log(res.data);
-      if (res.data.acknowledged) {
-        alert("add favourite item in favourite page");
-        // navigate("/favourite");
-      }
-    });
+    delete food._id
+    axios
+      .post(`http://localhost:5000/favourite`, food)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.acknowledged) {
+          alert("add favourite item in favourite page");
+          navigate("/favourite");
+        }
+      });
   };
   return (
     <div className="container py-10 bg-gray-50">

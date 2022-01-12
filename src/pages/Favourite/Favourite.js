@@ -8,33 +8,25 @@ const Favourite = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   useEffect(() => {
-    axios
-      .get("https://warm-coast-40997.herokuapp.com/favourite")
-      .then((res) => {
-        const favouriteFoods = res.data.filter(
-          (favourite) =>
-            favourite.status === "favourite" &&
-            favourite.userEmail === currentUser?.email
-        );
-        setFoods(favouriteFoods);
-      });
+    axios.get("http://localhost:5000/favourite").then((res) => {
+      const favouriteFoods = res.data.filter(
+        (favourite) =>
+          favourite.status === "favourite" &&
+          favourite.userEmail === currentUser?.email
+      );
+      setFoods(favouriteFoods);
+    });
   }, [isDelete]);
   const handleDetails = (id) => {
     navigate(`/food/${id}`);
   };
 
   // remove favourite item
-  const handleRemoveFavourite = (food) => {
-    axios
-      .delete(`https://warm-coast-40997.herokuapp.com/favourite/${food._id}`)
-      .then((res) => {
-        if (res.data.deleteCount) {
-          alert("delete successfull");
-          setDelete(true);
-        } else {
-          setDelete(false);
-        }
-      });
+  const handleRemoveFavourite = (id) => {
+    console.log(id)
+    axios.delete(`http://localhost:5000/favourite/${id}`).then((res) => {
+      console.log(res.data);
+    });
   };
   return (
     <div className="container my-4">
@@ -50,14 +42,14 @@ const Favourite = () => {
                 src={food.RecipeImage}
                 alt="product"
               />
-              <span className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-700 bg-opacity-0 group-hover:bg-opacity-50 text-2xl text-indigo-700 p-2 transition-all ease-in-out duration-300">
-                <h2
-                  className="absolute top-4 right-5"
-                  onClick={() => handleRemoveFavourite(food)}
+              <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-700 bg-opacity-0 group-hover:bg-opacity-50 text-2xl text-gray-900 p-2 transition-all ease-in-out duration-300">
+                <button
+                  className="absolute top-4 right-5 bg-gray-300 px-3 py-2"
+                  onClick={() => handleRemoveFavourite(food._id)}
                 >
                   RF
-                </h2>
-              </span>
+                </button>
+              </div>
             </div>
             <h2 className="uppercase my-2 font-semibold text-md  font-openSans">
               {food.recipeName}

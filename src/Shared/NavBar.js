@@ -14,7 +14,7 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    axios.get("https://warm-coast-40997.herokuapp.com/admin").then((res) => {
+    axios.get("http://localhost:5000/admin").then((res) => {
       const userAdmin = res.data.find(
         (admin) => admin?.email === currentUser?.email
       );
