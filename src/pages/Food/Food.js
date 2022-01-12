@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 import { FacebookShareButton, FacebookIcon } from "react-share";
+import Loader from "../../components/Loader/Loader";
 
 const Food = () => {
   const [foods, setFoods] = useState([]);
@@ -83,7 +84,7 @@ const Food = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10 relative">
-        {searchText.map((food) => (
+        {!foods.length ? <Loader /> : searchText.map((food) => (
           <div key={food._id} className="shadow-md p-2 bg-white rounded-sm">
             <div className="overflow-hidden relative group cursor-pointer">
               <img

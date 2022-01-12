@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 import { FacebookShareButton, FacebookIcon } from "react-share";
-
+import Loader from "../../components/Loader/Loader";
 const Home = () => {
   const [foods, setFoods] = useState([]);
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Home = () => {
   const handleFavourite = (food) => {
     food.status = "favourite";
     food.userEmail = currentUser?.email;
-    delete food._id
+    delete food._id;
     axios
       .post(`https://warm-coast-40997.herokuapp.com/favourite`, food)
       .then((res) => {
@@ -33,6 +33,7 @@ const Home = () => {
         }
       });
   };
+  console.log(foods);
   return (
     <div className="container py-10 bg-gray-50">
       <div className="inline-block hero-wrapper">
@@ -43,45 +44,49 @@ const Home = () => {
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10 relative">
-        {foods.map((food) => (
-          <>
-            <div key={food._id} className="shadow-md p-2 bg-white rounded-sm">
-              <div className="overflow-hidden relative group cursor-pointer">
-                <img
-                  className="image-style"
-                  src={food.RecipeImage}
-                  alt="product"
-                />
-                <span
-                  className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-700 bg-opacity-0 group-hover:bg-opacity-50 text-2xl text-indigo-700 p-2 transition-all ease-in-out duration-300"
-                  onClick={() => handleFavourite(food)}
-                >
-                  <span className="absolute top-4 right-5">
-                    <AiFillHeart />
-                  </span>
-                </span>
-                <span className="absolute top-14 right-4">
-                  <FacebookShareButton
-                    url={`https://recipeapp-86c94.web.app/food/details/${food._id}`}
-                    quote={food.recipeName}
+        {!foods.length ? (
+          <Loader />
+        ) : (
+          foods.map((food) => (
+            <>
+              <div key={food._id} className="shadow-md p-2 bg-white rounded-sm">
+                <div className="overflow-hidden relative group cursor-pointer">
+                  <img
+                    className="image-style"
+                    src={food.RecipeImage}
+                    alt="product"
+                  />
+                  <span
+                    className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-700 bg-opacity-0 group-hover:bg-opacity-50 text-2xl text-indigo-700 p-2 transition-all ease-in-out duration-300"
+                    onClick={() => handleFavourite(food)}
                   >
-                    <FacebookIcon size={30} />
-                  </FacebookShareButton>
-                </span>
+                    <span className="absolute top-4 right-5">
+                      <AiFillHeart />
+                    </span>
+                  </span>
+                  <span className="absolute top-14 right-4">
+                    <FacebookShareButton
+                      url={`https://recipeapp-86c94.web.app/food/details/${food._id}`}
+                      quote={food.recipeName}
+                    >
+                      <FacebookIcon size={30} />
+                    </FacebookShareButton>
+                  </span>
+                </div>
+                <h2 className="uppercase my-2 font-semibold  font-openSans">
+                  {food.recipeName}
+                </h2>
+                <p className="my-2 font-openSans">Category: {food.category}</p>
+                <button
+                  className="py-1 w-full text-md inline-block rounded-md uppercase bg-indigo-600 text-white hover:bg-indigo-700"
+                  onClick={() => handleDetails(food._id)}
+                >
+                  Details
+                </button>
               </div>
-              <h2 className="uppercase my-2 font-semibold  font-openSans">
-                {food.recipeName}
-              </h2>
-              <p className="my-2 font-openSans">Category: {food.category}</p>
-              <button
-                className="py-1 w-full text-md inline-block rounded-md uppercase bg-indigo-600 text-white hover:bg-indigo-700"
-                onClick={() => handleDetails(food._id)}
-              >
-                Details
-              </button>
-            </div>
-          </>
-        ))}
+            </>
+          ))
+        )}
       </div>
     </div>
   );
