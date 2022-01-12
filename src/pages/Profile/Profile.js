@@ -6,7 +6,7 @@ const Profile = () => {
   const [isDelete, setDelete] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:5000/allFood/").then((res) => {
+    axios.get("https://warm-coast-40997.herokuapp.com/allFood/").then((res) => {
       const matchData = res.data;
       setFoods(matchData);
     });
@@ -18,7 +18,7 @@ const Profile = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/allFood/${id}`)
+      .delete(`https://warm-coast-40997.herokuapp.com/allFood/${id}`)
       .then((res) => {
         if (res.data.deletedCount) {
           alert("delete successfull");

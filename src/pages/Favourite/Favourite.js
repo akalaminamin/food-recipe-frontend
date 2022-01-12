@@ -8,7 +8,7 @@ const Favourite = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   useEffect(() => {
-    axios.get("http://localhost:5000/favourite").then((res) => {
+    axios.get("https://warm-coast-40997.herokuapp.com/favourite").then((res) => {
       const favouriteFoods = res.data.filter(
         (favourite) =>
           favourite.status === "favourite" &&
@@ -24,7 +24,7 @@ const Favourite = () => {
   // remove favourite item
   const handleRemoveFavourite = (id) => {
     console.log(id)
-    axios.delete(`http://localhost:5000/favourite/${id}`).then((res) => {
+    axios.delete(`https://warm-coast-40997.herokuapp.com/favourite/${id}`).then((res) => {
       console.log(res.data);
     });
   };

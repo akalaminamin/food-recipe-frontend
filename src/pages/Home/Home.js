@@ -11,7 +11,7 @@ const Home = () => {
   const { currentUser } = useAuth();
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allFood")
+      .get("https://warm-coast-40997.herokuapp.com/allFood")
       .then((res) => setFoods(res.data));
   }, []);
 
@@ -24,7 +24,7 @@ const Home = () => {
     food.userEmail = currentUser?.email;
     delete food._id
     axios
-      .post(`http://localhost:5000/favourite`, food)
+      .post(`https://warm-coast-40997.herokuapp.com/favourite`, food)
       .then((res) => {
         console.log(res.data);
         if (res.data.acknowledged) {
