@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const Admin = () => {
   const [admin, setAdmin] = useState(null);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAdmin({ ...admin, [name]: value });
@@ -11,7 +13,12 @@ const Admin = () => {
     e.preventDefault();
     axios
       .post("https://warm-coast-40997.herokuapp.com/admin", admin)
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        if (res.data.acknowledged) {
+          Swal.fire("Add Admin", "Admin Added Successfully", "success");
+          navigate("/");
+        }
+      });
   };
   return (
     <div className="container my-5">
