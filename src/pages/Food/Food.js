@@ -62,12 +62,12 @@ const Food = () => {
           <input
             type="text"
             placeholder="Search Your Product"
-            className="search-input col-span-6"
+            className="search-input !md:mr-3 col-span-6"
             onChange={handleFilter}
           />
           <select
             name="category"
-            className="search-input col-span-2"
+            className="search-input !ml-0 col-span-2"
             onChange={handleChange}
             required
           >
