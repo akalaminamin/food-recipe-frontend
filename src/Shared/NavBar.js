@@ -35,11 +35,11 @@ const NavBar = () => {
       >
         <div className="container mx-auto flex flex-wrap flex-col md:flex-row items-start md:items-center">
           <Link to="/">
-            <h2 className="uppercase font-inter font-bold text-lg">
+            <h2 className="uppercase font-inter hidden md:block font-bold text-lg">
               Food Recipe
             </h2>
           </Link>
-          <nav className="md:ml-auto flex items-center flex-wrap text-base justify-start cursor-pointer flex-col md:flex-row space-y-4 md:space-y-0">
+          <nav className="md:ml-auto flex items-start md:items-center flex-wrap text-base justify-start cursor-pointer flex-col md:flex-row space-y-4 md:space-y-0">
             <Link
               to="/"
               className="nav-link mt-3 md:mt-0"

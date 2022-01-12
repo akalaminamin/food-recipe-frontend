@@ -25,7 +25,12 @@ const Favourite = () => {
   const handleRemoveFavourite = (id) => {
     console.log(id)
     axios.delete(`https://warm-coast-40997.herokuapp.com/favourite/${id}`).then((res) => {
-      console.log(res.data);
+      if(res.data.deletedCount){
+        alert("Your Favourite menu is remove")
+        setDelete(true)
+      }else{
+        setDelete(false)
+      }
     });
   };
   return (
