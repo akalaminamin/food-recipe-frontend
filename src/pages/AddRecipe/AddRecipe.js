@@ -38,6 +38,7 @@ const AddRecipe = () => {
         .then((res) => {
           if (res.data.acknowledged) {
             Swal.fire("Update!", "Food Update Success", "success");
+            navigate("/")
           }
         });
     } else {
