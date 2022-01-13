@@ -26,7 +26,7 @@ const Admin = () => {
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-12 space-x-3">
           <input
-            type="email"
+            type="email" 
             name="email"
             required
             placeholder="Enter admin email"
