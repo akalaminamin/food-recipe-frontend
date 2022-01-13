@@ -79,6 +79,7 @@ const AddRecipe = () => {
               name="recipeName"
               className="search-input"
               type="text"
+              required
               defaultValue={id ? foodRecipes.recipeName : ""}
               placeholder="Recipe Name"
               onChange={handleChange}
@@ -87,6 +88,7 @@ const AddRecipe = () => {
               name="cusine"
               className="search-input"
               type="text"
+              required
               defaultValue={id ? foodRecipes.cusine : ""}
               placeholder="cusine"
               onChange={handleChange}
@@ -95,6 +97,7 @@ const AddRecipe = () => {
               name="author"
               className="search-input"
               type="text"
+              required
               defaultValue={id ? foodRecipes.author : ""}
               placeholder="Author"
               onChange={handleChange}
@@ -103,6 +106,7 @@ const AddRecipe = () => {
               name="RecipeImage"
               className="search-input"
               type="text"
+              required
               defaultValue={id ? foodRecipes.RecipeImage : ""}
               placeholder="Enter Image url"
               onChange={handleChange}
@@ -129,6 +133,7 @@ const AddRecipe = () => {
               className="search-input"
               cols="30"
               rows="5"
+              required
               placeholder="write your method"
               onChange={handleChange}
             ></textarea>
@@ -137,6 +142,7 @@ const AddRecipe = () => {
               name="ingredients"
               className="search-input"
               cols="30"
+              required
               rows="5"
               placeholder="write your ingredients"
               onChange={handleChange}

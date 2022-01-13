@@ -28,6 +28,7 @@ const Admin = () => {
           <input
             type="email"
             name="email"
+            required
             placeholder="Enter admin email"
             className="search-input col-span-10"
             onChange={handleChange}
