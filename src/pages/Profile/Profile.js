@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { useAuth } from "../../contexts/AuthProvider/AuthProvider";
 const Profile = () => {
   const [foods, setFoods] = useState([]);
-  const [isDelete, setDelete] = useState(false);
+  const [isDelete, setDelete] = useState(null);
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {

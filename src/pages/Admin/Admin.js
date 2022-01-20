@@ -27,7 +27,7 @@ const Admin = () => {
         <div className="grid grid-cols-12 space-x-3">
           <input
             type="email" 
-            name="email"
+            name="email" 
             required
             placeholder="Enter admin email"
             className="search-input col-span-10"
@@ -42,4 +42,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Admin;   // 9856000602787943
